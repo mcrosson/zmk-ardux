@@ -23,8 +23,8 @@
 #define KEY_I 6
 #define KEY_O 5
 // Big ardux F1-12 layer keys for combo
-#define KEY_F_TOP 4
-#define KEY_F_BOTTOM 9
+#define KEY_F_TOP 9
+#define KEY_F_BOTTOM 14
 
 // Define Offsets
 #define LEADING_NONES NONE(0,0, 0)

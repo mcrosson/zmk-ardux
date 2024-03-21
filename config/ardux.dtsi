@@ -151,9 +151,9 @@
 			label = "Custom";                                          \
 			bindings = <                                               \
 				LEADING_NONES                                          \
-				&kp C_MUTE &kp INS   &kp C_VOL_UP  &none               \
+				&kp C_AC_BACK &kp C_AC_HOME   &kp C_VOL_UP  &kp PSCRN  \
 				MIDDLE_NONES                                           \
-				&sk RSHFT  &kp PSCRN &kp C_VOL_DN  &mo LAYER_ID_CUSTOM \
+				&kp C_MUTE  &kp PSCRN &kp C_VOL_DN  &mo LAYER_ID_CUSTOM \
 				TRAILING_NONES                                         \
 			>;                                                         \
 		};
@@ -164,9 +164,9 @@
 			label = "Custom";                                          \
 			bindings = <                                               \
 				LEADING_NONES                                          \
-				&none               &kp C_VOL_UP  &kp INS   &kp C_MUTE \
+				&kp PSCRN           &kp C_VOL_UP  &kp C_AC_HOME   &kp C_AC_BACK \
 				MIDDLE_NONES                                           \
-				&mo LAYER_ID_CUSTOM &kp C_VOL_DN  &kp PSCRN &sk RSHFT  \
+				&mo LAYER_ID_CUSTOM &kp C_VOL_DN  &kp C_AC_SEARCH &kp C_MUTE  \
 				TRAILING_NONES                                         \
 			>;                                                         \
 		};
@@ -224,9 +224,9 @@
 		 * 2 key combos
 		 *****************************************/
 		// Function layer doesn't apply to non-big ardux presently
-		#if defined ARDUX_BIG
+#if defined ARDUX_BIG
 		combo_layer_functions { key-positions = <KEY_F_TOP KEY_F_BOTTOM>; bindings = <&sl LAYER_ID_BIG_FUNCTION>; };
-		#endif
+#endif
 		combo_enter      { timeout-ms = <TIMEOUT_COMBO_2>; key-positions = <KEY_A KEY_E>; bindings = <&kp ENTER>; };
 		combo_control    { timeout-ms = <TIMEOUT_COMBO_2>; key-positions = <KEY_E KEY_S>; bindings = <&sk LCTRL>; };
 		combo_gui        { timeout-ms = <TIMEOUT_COMBO_2>; key-positions = <KEY_Y KEY_S>; bindings = <&sk LGUI>; };
@@ -255,6 +255,10 @@
 		combo_eight { layers = <LAYER_ID_NUMBERS>; timeout-ms = <TIMEOUT_COMBO_2>; key-positions = <KEY_R KEY_T>; bindings = <&kp N8>; };
 		combo_nine  { layers = <LAYER_ID_NUMBERS>; timeout-ms = <TIMEOUT_COMBO_2>; key-positions = <KEY_E KEY_Y>; bindings = <&kp N9>; };
 		combo_zero  { layers = <LAYER_ID_NUMBERS>; timeout-ms = <TIMEOUT_COMBO_2>; key-positions = <KEY_Y KEY_I>; bindings = <&kp N0>; };
+
+		combo_num_period { layers = <LAYER_ID_NUMBERS>; timeout-ms = <TIMEOUT_COMBO_2>; key-positions = <KEY_A KEY_Y>; bindings = <&kp PERIOD>; };
+		combo_num_comma  { layers = <LAYER_ID_NUMBERS>; timeout-ms = <TIMEOUT_COMBO_2>; key-positions = <KEY_A KEY_I>; bindings = <&kp COMMA>; };
+		combo_num_enter  { layers = <LAYER_ID_NUMBERS>; timeout-ms = <TIMEOUT_COMBO_2>; key-positions = <KEY_A KEY_E>; bindings = <&kp ENTER>; };
 
 		/*****************************************
 		 * 3 key combos
@@ -319,7 +323,7 @@
 / {
 	keymap {
 		compatible = "zmk,keymap";
-		#if defined ARDUX_BIG
+#if defined ARDUX_BIG
 		base {
 			label = "*ARDUX*";
 			bindings = <
@@ -334,7 +338,7 @@
 				BIG_TRAILING_NONES
 			>;
 		};
-		#else
+#else
 		base {
 			label = "ARDUX";
 			bindings = <
@@ -343,12 +347,12 @@
 				MIDDLE_NONES
 				&layer_symbols_kp LAYER_ID_SYMBOLS ARDUX_BASE_E                &kp ARDUX_BASE_Y     &kp ARDUX_BASE_I     &layer_custom_kp LAYER_ID_CUSTOM ARDUX_BASE_O
 				TRAILING_NONES
-				#if defined CUSTOM_THUMB
+#if defined CUSTOM_THUMB
 				CUSTOM_THUMB
-				#endif
+#endif
 			>;
 		};
-		#endif
+#endif
 		numbers {
 			label = "Number";
 			bindings = <
@@ -400,7 +404,7 @@
 			>;
 		};
 		ARDUX_LAYER_CUSTOM
-		#if defined ARDUX_BIG
+#if defined ARDUX_BIG
 		big_ardux_symbol {
 			label = "*Symbol*";
 			bindings = <
@@ -429,7 +433,7 @@
 				BIG_TRAILING_NONES
 			>;
 		};
-		#endif
+#endif
 	};
 };
 #endif
@@ -442,7 +446,7 @@
 / {
 	keymap {
 		compatible = "zmk,keymap";
-		#if defined ARDUX_BIG
+#if defined ARDUX_BIG
 		base {
 			label = "*ARDUX*";
 			bindings = <
@@ -457,7 +461,21 @@
 				BIG_TRAILING_NONES
 			>;
 		};
-		#else
+		numbers {
+			label = "*Number*";
+			bindings = <
+				BIG_LEADING_NONES
+				&mo LAYER_ID_NUMBERS                        &kp N3    &kp N2    &kp N1 &kp MINUS
+				BIG_BETWEEN_ROW_ONE_TWO_NONES
+				&none                                       &kp N6    &kp N5    &kp N4 &kp SLASH
+				BIG_BETWEEN_ROW_TWO_THREE_NONES
+				&none &none &none &kp TAB &kp COLON
+				BIG_BETWEEN_ROW_THREE_THUMBS
+				&kp TAB &kp UNDERSCORE &kp SPACE
+				BIG_TRAILING_NONES
+			>;
+		};
+#else
 		base {
 			label = "ARDUX";
 			bindings = <
@@ -466,12 +484,11 @@
 				MIDDLE_NONES
 				&layer_custom_kp LAYER_ID_CUSTOM ARDUX_BASE_O          &kp ARDUX_BASE_I     &kp ARDUX_BASE_Y     &layer_symbols_kp LAYER_ID_SYMBOLS ARDUX_BASE_E
 				TRAILING_NONES
-				#if defined CUSTOM_THUMB
+#if defined CUSTOM_THUMB
 				CUSTOM_THUMB
-				#endif
+#endif
 			>;
 		};
-		#endif
 		numbers {
 			label = "Number";
 			bindings = <
@@ -482,6 +499,7 @@
 				TRAILING_NONES
 			>;
 		};
+#endif
 		symbols {
 			label = "Symbol";
 			bindings = <
@@ -523,7 +541,7 @@
 			>;
 		};
 		ARDUX_LAYER_CUSTOM
-		#if defined ARDUX_BIG
+#if defined ARDUX_BIG
 		big_ardux_symbol {
 			label = "*Symbol*";
 			bindings = <
@@ -552,7 +570,7 @@
 				BIG_TRAILING_NONES
 			>;
 		};
-		#endif
+#endif
 	};
 };
 #endif
