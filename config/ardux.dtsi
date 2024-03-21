@@ -256,6 +256,10 @@
 		combo_nine  { layers = <LAYER_ID_NUMBERS>; timeout-ms = <TIMEOUT_COMBO_2>; key-positions = <KEY_E KEY_Y>; bindings = <&kp N9>; };
 		combo_zero  { layers = <LAYER_ID_NUMBERS>; timeout-ms = <TIMEOUT_COMBO_2>; key-positions = <KEY_Y KEY_I>; bindings = <&kp N0>; };
 
+		combo_num_dot { layers = <LAYER_ID_NUMBERS>; timeout-ms = <TIMEOUT_COMBO_2>; key-positions = <KEY_A KEY_Y>; bindings = <&kp PERIOD>; };
+		combo_num_com { layers = <LAYER_ID_NUMBERS>; timeout-ms = <TIMEOUT_COMBO_2>; key-positions = <KEY_A KEY_I>; bindings = <&kp COMMA>; };
+		combo_num_ent { layers = <LAYER_ID_NUMBERS>; timeout-ms = <TIMEOUT_COMBO_2>; key-positions = <KEY_A KEY_E>; bindings = <&kp ENTER>; };
+
 		/*****************************************
 		 * 3 key combos
 		 *****************************************/
@@ -457,6 +461,20 @@
 				BIG_TRAILING_NONES
 			>;
 		};
+		numbers {
+			label = "*Number*";
+			bindings = <
+				BIG_LEADING_NONES
+				&mo LAYER_ID_NUMBERS                        &kp N3    &kp N2    &kp N1    &kp MINUS   
+				BIG_BETWEEN_ROW_ONE_TWO_NONES
+				&none                                       &kp N6    &kp N5    &kp N4    &kp SLASH
+				BIG_BETWEEN_ROW_TWO_THREE_NONES
+				&none                                       &none     &none     &kp TAB   &kp COLON
+				BIG_BETWEEN_ROW_THREE_THUMBS
+				&kp TAB    &kp UNDERSCORE    &kp SPACE
+				BIG_TRAILING_NONES
+			>;
+		};
 		#else
 		base {
 			label = "ARDUX";
@@ -471,7 +489,6 @@
 				#endif
 			>;
 		};
-		#endif
 		numbers {
 			label = "Number";
 			bindings = <
@@ -482,6 +499,7 @@
 				TRAILING_NONES
 			>;
 		};
+		#endif
 		symbols {
 			label = "Symbol";
 			bindings = <
